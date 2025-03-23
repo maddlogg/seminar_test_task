@@ -1,0 +1,188 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+body:has(.modal) {
+  overflow: hidden;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  background: #fff;
+}
+
+.title {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.seminar-list {
+  position: relative;
+  z-index: 4;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-rows: auto auto 1fr auto;
+  gap: 30px;
+
+  padding: 20px 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.seminar-list__item {
+  grid-row: span 5;
+
+  display: grid;
+  grid-template-rows: subgrid;
+  gap: 15px;
+
+  padding: 10px;
+
+  border-radius: 10px;
+  border: 1px solid #1e1e1e;
+  overflow: hidden;
+}
+
+.seminar-list__item__img-wrapper {
+  max-height: 240px;
+
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.seminar-list__item__img-wrapper img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.seminar-list__item h3,
+.seminar-list__item p,
+.seminar-list__item time {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.seminar-list__item p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.seminar-list__item span {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.seminar-list__item__buttonset,
+.modal__buttonset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.seminar-list__item__buttonset > button,
+.modal__buttonset > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 100px;
+  min-height: 30px;
+  padding: 5px 10px;
+
+  font-size: 14px;
+  color: #fff;
+
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  background: #1e1e1e;
+  cursor: pointer;
+}
+
+.seminar-list__item__buttonset > button:hover,
+.modal__buttonset > button:hover {
+  color: #1e1e1e;
+  text-decoration: underline;
+
+  background: #fff;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: -15px;
+
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 15px;
+
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 20px;
+
+  background: #fff;
+  border-radius: 10px;
+}
+
+.modal > p {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.modal > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  min-width: 300px;
+}
+
+.modal > form .form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-item > label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e1e1e;
+}
+
+.form-item > input {
+  padding: 10px;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e1e1e;
+}
