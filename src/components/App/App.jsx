@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import "./App.less";
 import SeminarList from "../SeminarList/index.js";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/index.js";
 import EditItemModal from "../EditItemModal/index.js";
 import Loader from "../Loader/index.js";
 import Error from "../Error/index.js";
-import { _get, _post, _patch, _delete } from "../../api-requests/Api.js";
+import { _get, _post, _patch, _delete } from "../../api-requests/api.js";
+import styles from "./App.module.less";
 
 function App() {
   const [seminars, setSeminars] = useState([]);
-  const [DeleteItem, setDeleteItem] = useState({});
+  const [deleteItem, setdeleteItem] = useState({});
   const [confirmDeleteIsOpen, setConfirmDeleteIsOpen] = useState(false);
   const [seminarToEdit, setSeminarToEdit] = useState({});
   const [editItemIsOpen, setEditItemIsOpen] = useState(false);
@@ -18,10 +18,10 @@ function App() {
 
   //Запрос данных для первоначального рендеринга
   useEffect(function () {
-    getData();
+    getSeminars();
   }, []);
 
-  async function getData() {
+  async function getSeminars() {
     try {
       setIsLoading(true);
       const res = await _get("/seminars");
@@ -39,7 +39,7 @@ function App() {
     }
   }
 
-  async function deleteData(id) {
+  async function deleteSeminar(id) {
     try {
       const res = await _delete(`/seminars/${id}`);
 
@@ -57,7 +57,7 @@ function App() {
     }
   }
 
-  async function editData(item) {
+  async function editSeminar(item) {
     try {
       const res = await _patch(`/seminars/${item.id}`, item);
 
@@ -82,23 +82,23 @@ function App() {
 
   //Функция удаления элемента списка с сервера
   function handleDeleteSeminar(id) {
-    deleteData(id);
+    deleteSeminar(id);
   }
 
   //Функция редактирования данных элемента на сервере
   function handleSeminarEdit(item) {
-    editData(item);
+    editSeminar(item);
   }
 
   return (
-    <div className="app">
-      <h1 className="title">Доступные семинары</h1>
+    <div className={styles.app}>
+      <h1 className={styles.title}>Доступные семинары</h1>
       {/* Рендеринг списка элементов */}
       {isLoading && <Loader />}
       {!isLoading && !error && (
         <SeminarList
           seminars={seminars}
-          onDeleteSeminar={setDeleteItem}
+          onDeleteSeminar={setdeleteItem}
           setConfirmDeleteIsOpen={setConfirmDeleteIsOpen}
           setSeminarToEdit={setSeminarToEdit}
           setEditItemIsOpen={setEditItemIsOpen}
@@ -110,7 +110,7 @@ function App() {
       {confirmDeleteIsOpen && !editItemIsOpen && (
         <ConfirmDeleteModal
           setConfirmDeleteIsOpen={setConfirmDeleteIsOpen}
-          DeleteItem={DeleteItem}
+          deleteItem={deleteItem}
           onDeleteSeminar={handleDeleteSeminar}
         />
       )}

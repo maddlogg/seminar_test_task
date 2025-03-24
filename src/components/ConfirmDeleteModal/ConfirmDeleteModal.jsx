@@ -2,10 +2,10 @@ import styles from "./ConfirnDeleteModal.module.less";
 
 function ConfirmDeleteModal({
   setConfirmDeleteIsOpen,
-  DeleteItem,
+  deleteItem,
   onDeleteSeminar,
 }) {
-  const { id } = DeleteItem;
+  const { id } = deleteItem;
 
   function handleDeletionSubmit(e) {
     e.preventDefault();
@@ -34,7 +34,7 @@ function ConfirmDeleteModal({
       onClick={handleOuterClick}
     >
       <div className={styles.modal}>
-        <p>{`Удалить семинар ${DeleteItem.title}?`}</p>
+        <p>{`Удалить семинар ${deleteItem.title}?`}</p>
         <div className={styles.buttonset}>
           <button type="submit" onClick={handleDeletionSubmit}>
             Да
