@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import "./App.css";
-import SeminarList from "./components/SeminarList";
-import ConfirmDeleteModal from "./components/ConfirmDeleteModal";
-import EditItemModal from "./components/EditItemModal";
-import Loader from "./components/Loader";
-import Error from "./components/Error";
-import { _get, _post, _patch, _delete } from "./api-requests/Api.js";
+import "./App.less";
+import SeminarList from "../SeminarList/index.js";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/index.js";
+import EditItemModal from "../EditItemModal/index.js";
+import Loader from "../Loader/index.js";
+import Error from "../Error/index.js";
+import { _get, _post, _patch, _delete } from "../../api-requests/Api.js";
 
 function App() {
   const [seminars, setSeminars] = useState([]);
-  const [idDeleteItem, setIdDeleteItem] = useState("");
-  const [сonfirmDeleteIsOpen, setConfirmDeleteIsOpen] = useState(false);
+  const [DeleteItem, setDeleteItem] = useState({});
+  const [confirmDeleteIsOpen, setConfirmDeleteIsOpen] = useState(false);
   const [seminarToEdit, setSeminarToEdit] = useState({});
   const [editItemIsOpen, setEditItemIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +59,7 @@ function App() {
 
   async function editData(item) {
     try {
-      const res = await _patch(`/seminars/${item.id}`);
+      const res = await _patch(`/seminars/${item.id}`, item);
 
       if (res.statusText !== "OK") {
         throw new Error(res.statusText);
@@ -98,7 +98,7 @@ function App() {
       {!isLoading && !error && (
         <SeminarList
           seminars={seminars}
-          onDeleteSeminar={setIdDeleteItem}
+          onDeleteSeminar={setDeleteItem}
           setConfirmDeleteIsOpen={setConfirmDeleteIsOpen}
           setSeminarToEdit={setSeminarToEdit}
           setEditItemIsOpen={setEditItemIsOpen}
@@ -107,16 +107,16 @@ function App() {
       {error && <Error message={error} />}
       {/* Рендеринг модльного окна удаления элемента, при условии, что ни один
       элемент не редактируется */}
-      {сonfirmDeleteIsOpen && !editItemIsOpen && (
+      {confirmDeleteIsOpen && !editItemIsOpen && (
         <ConfirmDeleteModal
           setConfirmDeleteIsOpen={setConfirmDeleteIsOpen}
-          idDeleteItem={idDeleteItem}
+          DeleteItem={DeleteItem}
           onDeleteSeminar={handleDeleteSeminar}
         />
       )}
       {/* Рендеринг модльного окна удаления элемента, при условии, что модальное
       окно удаления закрыто */}
-      {!сonfirmDeleteIsOpen && editItemIsOpen && (
+      {!confirmDeleteIsOpen && editItemIsOpen && (
         <EditItemModal
           seminarToEdit={seminarToEdit}
           setEditItemIsOpen={setEditItemIsOpen}

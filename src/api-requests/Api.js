@@ -1,28 +1,3 @@
-// const server_url = "http://localhost:3001/seminars";
-
-// async function getData(url = server_url) {
-//   try {
-//     setIsLoading(true);
-//     const res = await fetch(url);
-
-//     if (!res.ok) {
-//       throw new Error(res.statusText);
-//     }
-
-//     const data = await res.json();
-//     setSeminars(data);
-
-//     if (data.Responce === false) {
-//       throw new Error("Нет данных");
-//     }
-//   } catch (error) {
-//     console.log(error.message);
-//     setError(error.message);
-//   } finally {
-//     setIsLoading(false);
-//   }
-// }
-
 import axios from "axios";
 
 const BASE_URL = "http://localhost:3001";

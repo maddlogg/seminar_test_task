@@ -1,4 +1,5 @@
-import Seminar from "./Seminar";
+import Seminar from "../Seminar/index";
+import styles from "./SeminarList.module.less";
 
 function SeminarList({
   seminars,
@@ -8,7 +9,7 @@ function SeminarList({
   setEditItemIsOpen,
 }) {
   return (
-    <ul className="seminar-list">
+    <ul className={styles.list}>
       {seminars?.map((seminar) => (
         <Seminar
           key={seminar.id}
