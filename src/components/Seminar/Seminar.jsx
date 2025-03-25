@@ -9,6 +9,10 @@ function Seminar({
 }) {
   const { title, description, date, time, photo } = seminar;
 
+  //Обработчик клика кнопок внутри семинара
+  //Если клик на кнопу редактирования, открывает окно редактирования
+  //Если клик на кнопку удаления, открывает окно подтверждения удаления
+  //Одновременно открыто может быть только одно окно
   function handleButtonClick(e) {
     if (e.target.id === "edit") {
       setSeminarToEdit(seminar);

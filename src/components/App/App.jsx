@@ -21,6 +21,7 @@ function App() {
     getSeminars();
   }, []);
 
+  //Функция для запроса данных
   async function getSeminars() {
     try {
       setIsLoading(true);
@@ -39,6 +40,7 @@ function App() {
     }
   }
 
+  //Функция для удаления данных
   async function deleteSeminar(id) {
     try {
       const res = await _delete(`/seminars/${id}`);
@@ -57,6 +59,7 @@ function App() {
     }
   }
 
+  //Функция для редактирования данных
   async function editSeminar(item) {
     try {
       const res = await _patch(`/seminars/${item.id}`, item);
@@ -80,12 +83,12 @@ function App() {
     }
   }
 
-  //Функция удаления элемента списка с сервера
+  //Обработчик события удаления семинара
   function handleDeleteSeminar(id) {
     deleteSeminar(id);
   }
 
-  //Функция редактирования данных элемента на сервере
+  //Обработчик события редактирования семинара
   function handleSeminarEdit(item) {
     editSeminar(item);
   }
@@ -94,7 +97,9 @@ function App() {
     <div className={styles.app}>
       <h1 className={styles.title}>Доступные семинары</h1>
       {/* Рендеринг списка элементов */}
+      {/* Проверяется условие идёт ли загрузка и отображение загрузки */}
       {isLoading && <Loader />}
+      {/* Если загрузка не идёт и нет ошибки, отображаем данные компонента с семинарами */}
       {!isLoading && !error && (
         <SeminarList
           seminars={seminars}
@@ -104,6 +109,7 @@ function App() {
           setEditItemIsOpen={setEditItemIsOpen}
         />
       )}
+      {/* Проверяется условие есть ли ошибка при загрузке и отображение ошибки */}
       {error && <Error message={error} />}
       {/* Рендеринг модльного окна удаления элемента, при условии, что ни один
       элемент не редактируется */}

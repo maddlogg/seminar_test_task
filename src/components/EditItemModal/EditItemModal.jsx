@@ -10,8 +10,13 @@ function EditItemModal({
   const [editionResult, setEditionResult] = useState(seminarToEdit);
   const { title, description, date, time, photo } = editionResult;
 
+  //Преобразование даты в формат, который воспринимает инпут с типом даты
   const dateFormat = date.split(".").reverse().join("-");
 
+  //Обработчик ввода новых данных в окне редактирования
+  //Если обработчик сраработает на инпут даты,
+  //то его значение будет преобразовано в необходимый формат
+  //В ином случае будет использовано значение без манипуляций
   function handleSeminarInputEdition(e) {
     if (e.target.name === "date") {
       setEditionResult({
@@ -26,6 +31,9 @@ function EditItemModal({
     }
   }
 
+  //Обработчик клика внутри модального окна
+  //Если пользователь подтверждает изменения, они будут записаны и отправлены на сервер
+  //В ином случае окно будет закрыто
   function handleEditionSubmit(e) {
     e.preventDefault();
 
@@ -39,6 +47,7 @@ function EditItemModal({
     }
   }
 
+  //Обработчик клика вне окна для его закрытия
   function handleOuterClick(e) {
     if (e.target.id === "edit-modal") {
       e.stopPropagation();

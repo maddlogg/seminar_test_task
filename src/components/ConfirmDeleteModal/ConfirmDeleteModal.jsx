@@ -5,8 +5,10 @@ function ConfirmDeleteModal({
   deleteItem,
   onDeleteSeminar,
 }) {
+  //Получаем id семинара для удаления
   const { id } = deleteItem;
 
+  //Обработчик клика в модальном окне, удаление при подтверждении, закрытие окна при отмене
   function handleDeletionSubmit(e) {
     e.preventDefault();
 
@@ -18,6 +20,7 @@ function ConfirmDeleteModal({
     }
   }
 
+  //Обработчик клика вне модального окна для закрытия
   function handleOuterClick(e) {
     if (e.target.id === "delete-modal") {
       e.stopPropagation();
